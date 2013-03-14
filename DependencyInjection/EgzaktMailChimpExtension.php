@@ -14,6 +14,7 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 class EgzaktMailChimpExtension extends Extension
 {
+
     /**
      * {@inheritDoc}
      */
@@ -24,5 +25,18 @@ class EgzaktMailChimpExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        // API Class
+        if (isset($config['api']['class'])) {
+            $container->setParameter('egzakt_mail_chimp.api.class', $config['api']['class']);
+        }
+
+        // Other parameters
+        foreach(array('api_key', 'secure') as $param) {
+            if (isset($config[$param])) {
+                $container->setParameter('egzakt_mail_chimp.' . $param, $config[$param]);
+            }
+        }
     }
+
 }

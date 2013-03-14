@@ -20,9 +20,25 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('egzakt_mail_chimp');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('api')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')
+                            ->defaultValue('Egzakt\MailChimpBundle\Lib\MailChimpApi')
+                        ->end()
+                    ->end()
+                ->end()
+
+                ->scalarNode('api_key')
+                    ->isRequired()
+                ->end()
+
+                ->booleanNode('secure')
+                    ->defaultFalse()
+                ->end()
+            ->end();
 
         return $treeBuilder;
     }

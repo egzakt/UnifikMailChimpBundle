@@ -1,7 +1,4 @@
-parameters:
-#    egzakt_mail_chimp.example.class: Egzakt\MailChimpBundle\Example
-
 services:
-#    egzakt_mail_chimp.example:
-#        class: %egzakt_mail_chimp.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    egzakt_mail_chimp.api:
+        class: %egzakt_mail_chimp.api.class%
+        arguments: [%egzakt_mail_chimp.api_key%, %egzakt_mail_chimp.secure%]

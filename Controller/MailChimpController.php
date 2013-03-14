@@ -2,14 +2,9 @@
 
 namespace Egzakt\MailChimpBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Egzakt\Frontend\CoreBundle\Lib\BaseController;
 
-
-class DefaultController extends Controller
+class MailChimpController extends BaseController
 {
-    
-    public function indexAction($name)
-    {
-        return $this->render('EgzaktMailChimpBundle:Default:index.html.twig', array('name' => $name));
-    }
+
 }

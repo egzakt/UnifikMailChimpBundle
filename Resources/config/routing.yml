@@ -1,3 +1,0 @@
-EgzaktMailChimpBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: EgzaktMailChimpBundle:Default:index }
