@@ -1,0 +1,27 @@
+Egzakt\MailChimpBundle\Entity\SubscriberList:
+  type: entity
+  table: null
+  repositoryClass: Egzakt\MailChimpBundle\Entity\SubscriberListRepository
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    createdAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create
+    updatedAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+  lifecycleCallbacks: {  }
+  oneToMany:
+    translations:
+      targetEntity: Egzakt\Backend\SubscriberBundle\Entity\SubscriberListTranslation
+      mappedBy: translatable
+      fetch: EAGER
+      cascade: [persist]

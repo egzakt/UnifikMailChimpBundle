@@ -1,0 +1,29 @@
+Egzakt\MailChimpBundle\Entity\SubscriberListTranslation:
+  type: entity
+  table: null
+  indexes:
+    subscriber_list_translation_idx:
+      columns: [locale, translatableId]
+  uniqueConstraints:
+    subscriber_list_translation_unique_idx:
+      columns: [locale, translatableId]
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    locale:
+      type: string
+      length: 5
+    listId:
+      type: string
+      length: 255
+  manyToOne:
+    translatable:
+      targetEntity: Egzakt\Backend\SubscriberBundle\Entity\SubscriberList
+      inversedBy:  translations
+      joinColumn:
+        name: translatableId
+        referencedColumnName: id
+        onDelete:  cascade

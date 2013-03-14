@@ -2,7 +2,7 @@
 
 namespace Egzakt\MailChimpBundle\Lib;
 
-require_once __DIR__ . 'MailChimp/MCAPI.class.php';
+require_once __DIR__ . '/MailChimp/MCAPI.class.php';
 
 /**
  * Class MailChimpApi
@@ -13,6 +13,15 @@ require_once __DIR__ . 'MailChimp/MCAPI.class.php';
  */
 class MailChimpApi
 {
+    /**
+     * @var string $apiKey
+     */
+    protected $apiKey;
+
+    /**
+     * @var bool $secure
+     */
+    protected $secure;
 
     /**
      * Construct
@@ -22,7 +31,20 @@ class MailChimpApi
      */
     public function __construct($apiKey, $secure)
     {
-        return new \MCAPI($apiKey, $secure);
+        $this->apiKey = $apiKey;
+        $this->secure = $secure;
+    }
+
+    /**
+     * Get Api
+     *
+     * Return a new instance of MCAPI
+     *
+     * @return \MCAPI
+     */
+    public function getApi()
+    {
+        return new \MCAPI($this->apiKey, $this->secure);
     }
 
 }

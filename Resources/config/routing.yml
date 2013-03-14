@@ -1,0 +1,3 @@
+EgzaktMailChimpBundle_subscribe:
+    pattern:  /subscriber/subscribe/{id}
+    defaults: { _controller: EgzaktMailChimpBundle:MailChimp:Subscribe, sectionId: 1 }
