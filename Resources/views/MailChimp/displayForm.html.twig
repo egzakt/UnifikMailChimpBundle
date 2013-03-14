@@ -1,0 +1,57 @@
+{% import "EgzaktMailChimpBundle:MailChimp:forms.html.twig" as forms %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@EgzaktMailChimpBundle/Resources/public/css/*'
+    %}
+    <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+<div id="mailchimp_wrapper">
+    <form name="subscribe" id="mailchimp_form" method="post" action="{{ path('EgzaktMailChimpBundle_subscribe', { 'listId': subscriberList.id }) }}">
+
+        {% block error %}
+            <div class="error_message"></div>
+        {% endblock error %}
+
+        {% block form %}
+            <table cellpadding="0" cellspacing="0" border="0">
+            {% if (subscriberList.displayNameField) %}
+                {% if subscriberList.splitNameField %}
+                    {{ forms.input('First Name', '_firstname', 'text', null, null, subscriberList.nameFieldRequired) }}
+                    {{ forms.input('Last Name', '_lastname', 'text', null, null, subscriberList.nameFieldRequired) }}
+                {% else %}
+                    {{ forms.input('Name', '_name', 'text', null, null, subscriberList.nameFieldRequired) }}
+                {% endif %}
+            {% endif %}
+
+            {{ forms.input('Email', '_email', 'text', null, null, true) }}
+
+            {% for customField in customFields %}
+                {% if ((customField.DataType == 'Text') or (customField.DataType == 'Number')) %}
+                    {{ forms.input(customField.displayName, customField.Key, 'text', customField.defaultValue, null, (customField.FieldName in requiredCustomFields)) }}
+                {% endif %}
+
+                {% if ((customField.DataType == 'MultiSelectOne') or (customField.DataType == 'MultiSelectMany')) %}
+                    {{ forms.select(customField.displayName, customField.Key, customField.DataType, customField.FieldOptions, customField.defaultValue, null, (customField.FieldName in requiredCustomFields), customField.emptyValue, customField.emptyValueString) }}
+                {% endif %}
+
+                {% if (customField.DataType == 'Date') %}
+                    {{ forms.input(customField.displayName, customField.Key, 'text', customField.defaultValue, 'calendar', (customField.FieldName in requiredCustomFields)) }}
+                {% endif %}
+            {% endfor %}
+                <tr>
+                    <td colspan="2" class="submit_colomn">
+                        {% block submitButton %}
+                            <input type="submit" name="submit_subscribe" value="{% trans %}Submit{% endtrans %}" />
+                        {% endblock submitButton %}
+                    </td>
+                </tr>
+            </table>
+        {% endblock form %}
+    </form>
+</div>
+
+{% include 'EgzaktMailChimpBundle:MailChimp:displayFormJavascript.html.twig' %}

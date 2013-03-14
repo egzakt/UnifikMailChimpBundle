@@ -1,0 +1,37 @@
+{% block subscriberJavascript %}
+    <script type="text/javascript">
+        $('#mailchimp_form').submit(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                dataType: 'json',
+                data: $(this).serialize(),
+                type: 'POST',
+                success: function(response){
+                    if (response.error || response.Code) {
+                        html = '<ul>';
+
+                        // Campaign Monitor Error
+                        if (response.Code) {
+                            html = html + '<li>' + response.Message + '</li>';
+                        }
+                        // Our error
+                        else {
+                            for(index in response.errorMessage) {
+                                html = html + '<li>' + response.errorMessage[index] + '</li>';
+                            }
+                        }
+
+                        html = html + '</ul>';
+                        $('#mailchimp_wrapper .error_message').html(html).show();
+                    }
+                    else {
+                        $('#mailchimp_wrapper .error_message').hide();
+                        $('#mailchimp_form').replaceWith('<div id="success_message">{% trans %}You have successfully subscribed to our newsletter.{% endtrans %}</div>');
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock subscriberJavascript %}

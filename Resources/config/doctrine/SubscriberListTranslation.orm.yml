@@ -1,6 +1,6 @@
 Egzakt\MailChimpBundle\Entity\SubscriberListTranslation:
   type: entity
-  table: null
+  table: MailChimpSubscriberListTranslation
   indexes:
     subscriber_list_translation_idx:
       columns: [locale, translatableId]

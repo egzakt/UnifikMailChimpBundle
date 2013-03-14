@@ -1,6 +1,6 @@
 Egzakt\MailChimpBundle\Entity\SubscriberList:
   type: entity
-  table: null
+  table: MailChimpSubscriberList
   repositoryClass: Egzakt\MailChimpBundle\Entity\SubscriberListRepository
   fields:
     id:

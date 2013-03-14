@@ -4,6 +4,7 @@ namespace Egzakt\MailChimpBundle\Controller;
 
 use Egzakt\MailChimpBundle\Entity\SubscriberList;
 use Egzakt\MailChimpBundle\Lib\MailChimpApi;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,26 +21,37 @@ class MailChimpController extends Controller
      */
     protected $subscriberList;
 
+    /**
+     * @var array $fields The field list
+     */
+    protected $fields;
+
+    /**
+     * @var array $groupings The Interest Groupings (Select-Multiple field which is not available from field list)
+     */
+    protected $groupings;
 
     /**
      * Init
+     *
+     * Init the API, get the List Fields and Groupings
+     *
+     * @param $id The Subscription List id
+     *
+     * @throws \Exception
      */
-    public function init()
+    protected function init($id)
     {
         $this->api = $this->get('egzakt_mail_chimp.api')->getApi();
-    }
 
-    protected function initList($id)
-    {
         $this->subscriberList = $this->get('doctrine')->getEntityManager()->getRepository('EgzaktMailChimpBundle:SubscriberList')->find($id);
 
         if (!$this->subscriberList) {
             throw new \Exception('Unable to find this Subscriber List');
         }
 
-        $fields = $this->api->listMergeVars($this->subscriberList->getListId());
-
-        $groupings = $this->api->listInterestGroupings($this->subscriberList->getListId());
+        $this->fields = $this->api->listMergeVars($this->subscriberList->getListId());
+        $this->groupings = $this->api->listInterestGroupings($this->subscriberList->getListId());
     }
 
     /**
@@ -53,8 +65,8 @@ class MailChimpController extends Controller
      */
     public function displayFormAction($id)
     {
-        $this->init();
-        $this->initList($id);
+        // Init the list
+        $this->init($id);
 
         return new Response('a');
     }
