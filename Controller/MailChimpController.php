@@ -8,6 +8,13 @@ use Egzakt\MailChimpBundle\Lib\MailChimpApi;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\EmailValidator;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotBlankValidator;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateValidator;
+
 class MailChimpController extends Controller
 {
 
@@ -30,6 +37,11 @@ class MailChimpController extends Controller
      * @var array $groupings The Interest Groupings (Select-Multiple field which is not available from field list)
      */
     protected $groupings;
+
+
+    protected $error = false;
+
+    protected $errors = array();
 
     /**
      * Init
@@ -133,6 +145,42 @@ class MailChimpController extends Controller
             'subscriberList' => $this->subscriberList,
             'fields' => $this->fields,
             'groupings' => $this->groupings
+        ));
+    }
+
+    /**
+     * Subscribe Action
+     *
+     * Process the submitted form to register a new subscription. This action is called via AJAX.
+     *
+     * @param Request $request
+     * @param integer $id
+     *
+     * @return Response
+     */
+    public function subscribeAction(Request $request, $id)
+    {
+        // Init the list
+        $this->init($id);
+
+        if ($request->getMethod() == 'POST') {
+
+            // Parameters to send to MailChimp
+            $mergeVars = array();
+
+            // POST form fields
+            $postedFields = $request->request->get('mailchimp_fields');
+
+            // Loop through the fields to validate
+            foreach($this->fields as $field) {
+                if ($field['req']) {
+
+                }
+            }
+        }
+
+        return $this->render('EgzaktMailChimpBundle:MailChimp:subscribe.html.twig', array(
+            'response' => json_encode($response)
         ));
     }
 
