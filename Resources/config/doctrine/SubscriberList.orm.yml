@@ -21,7 +21,7 @@ Egzakt\MailChimpBundle\Entity\SubscriberList:
   lifecycleCallbacks: {  }
   oneToMany:
     translations:
-      targetEntity: Egzakt\Backend\SubscriberBundle\Entity\SubscriberListTranslation
+      targetEntity: Egzakt\MailChimpBundle\Entity\SubscriberListTranslation
       mappedBy: translatable
       fetch: EAGER
       cascade: [persist]
