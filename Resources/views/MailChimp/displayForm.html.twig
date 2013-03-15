@@ -15,20 +15,24 @@
 
         {% block form %}
             <table cellpadding="0" cellspacing="0" border="0">
+                {% for field in fields %}
+                    {% if (field.field_type == 'text') %}
+                        {{ forms.input(field.name, field.tag, 'text', field.default, null, field.req) }}
+                    {% endif %}
 
-            {% for field in fields %}
-                {% if (field.field_type == 'text') %}
-                    {{ forms.input(field.name, field.tag, 'text', field.default, null, field.req) }}
-                {% endif %}
+                    {% if ((field.field_type == 'dropdown') or (field.field_type == 'radio')) %}
+                        {{ forms.select(field.name, field.tag, field.field_type, field.choices, field.default, null, field.req) }}
+                    {% endif %}
 
-                {% if ((field.field_type == 'dropdown') or (field.field_type == 'radio')) %}
-                    {{ forms.select(field.name, field.tag, field.field_type, field.choices, field.default, null, field.req) }}
-                {% endif %}
+                    {% if (field.field_type == 'date') %}
+                        {{ forms.input(field.name, field.tag, 'text', field.default, 'calendar', field.size, field.req) }}
+                    {% endif %}
+                {% endfor %}
 
-                {% if (field.field_type == 'date') %}
-                    {{ forms.input(field.name, field.tag, 'text', field.default, 'calendar', field.size, field.req) }}
-                {% endif %}
-            {% endfor %}
+                {% for field in groupings %}
+                    {{ forms.select(field.name, field.id, field.form_field, field.groups, null, null, false) }}
+                {% endfor %}
+
                 <tr>
                     <td colspan="2" class="submit_colomn">
                         {% block submitButton %}

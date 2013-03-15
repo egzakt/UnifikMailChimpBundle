@@ -36,7 +36,7 @@ class MailChimpController extends Controller
      *
      * Init the API, get the List Fields and Groupings
      *
-     * @param int $id The Subscription List id
+     * @param integer $id The Subscription List id
      *
      * @throws \Exception
      */
@@ -54,21 +54,23 @@ class MailChimpController extends Controller
         $this->groupings = $this->api->listInterestGroupings($this->subscriberList->getListId());
 
         // Remove hidden fields
-        $this->fields = $this->normalizeData($this->fields);
+        $this->fields = $this->normalizeFields($this->fields);
+        $this->groupings = $this->normalizeGroupings($this->groupings);
 
-        $a = $this->fields;
+        var_dump($this->fields);
+        var_dump($this->groupings);
     }
 
     /**
-     * Normalize Data
+     * Normalize Fields
      *
      * Return a normalized field type for form creation and removes fields we don't want to show
      *
-     * @param array $fields
+     * @param array $fields The list of fields
      *
      * @return array
      */
-    protected function normalizeData($fields)
+    protected function normalizeFields($fields)
     {
         // Convert "special" types to standard form field types
         $normalizedTypes = array(
@@ -77,7 +79,8 @@ class MailChimpController extends Controller
             'url' => 'text',
             'zip' => 'text',
             'number' => 'text',
-            'birthday' => 'date'
+            'birthday' => 'date',
+            'address' => 'text'
         );
 
         foreach($fields as $key => $field) {
@@ -95,11 +98,32 @@ class MailChimpController extends Controller
     }
 
     /**
+     * Normalize Groupings
+     *
+     * Return an array of grouping having the name as value instead of an array of parameters
+     *
+     * @param array $groupings The Groupings list
+     *
+     * @return array
+     */
+    protected function normalizeGroupings($groupings)
+    {
+        foreach($groupings as $key => $grouping) {
+
+            foreach($grouping['groups'] as $k => $group) {
+                $groupings[$key]['groups'][$k] = $group['name'];
+            }
+        }
+
+        return $groupings;
+    }
+
+    /**
      * Display Form
      *
      * Display the form to register to a Subscription List
      *
-     * @param int $id The SubscriberList id
+     * @param integer $id The SubscriberList id
      *
      * @return Response
      */
@@ -111,7 +135,7 @@ class MailChimpController extends Controller
         return $this->render('EgzaktMailChimpBundle:MailChimp:displayForm.html.twig', array(
             'subscriberList' => $this->subscriberList,
             'fields' => $this->fields,
-            'grouping' => $this->groupings
+            'groupings' => $this->groupings
         ));
     }
 
