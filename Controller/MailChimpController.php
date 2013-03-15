@@ -56,9 +56,6 @@ class MailChimpController extends Controller
         // Remove hidden fields
         $this->fields = $this->normalizeFields($this->fields);
         $this->groupings = $this->normalizeGroupings($this->groupings);
-
-        var_dump($this->fields);
-        var_dump($this->groupings);
     }
 
     /**
