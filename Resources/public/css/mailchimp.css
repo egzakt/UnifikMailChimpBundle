@@ -27,7 +27,12 @@
     padding: 0 0 10px 0;
 }
 
-#mailchimp_wrapper input.custom_checkbox_field {
+#mailchimp_wrapper input.checkbox_field {
+    width: auto;
+    margin: 0;
+}
+
+#mailchimp_wrapper input.radio_field {
     width: auto;
     margin: 0;
 }

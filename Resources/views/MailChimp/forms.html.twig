@@ -1,10 +1,10 @@
-{% macro input(name, key, type, value, class, size, required) %}
+{% macro input(name, key, type, value, class, required) %}
     <tr class="field_wrapper" id="field_wrapper_{{ key }}">
         <th>
-            {% if required %}<span class="required">*</span>{% endif %} <label for="field{{ key }}">{{ name|trans }}</label> :
+            {% if required %}<span class="required">*</span>{% endif %} <label for="field_{{ key }}">{{ name|trans }}</label> :
         </th>
         <td>
-            <input id="field{{ key }}" type="{{ type|default('text') }}" name="fields{{ key }}" value="{{ value|e }}" class="{{ class|default('input_field') }}"{% if size %} size="{{ size }}"{% endif %} />
+            <input id="field_{{ key }}" type="{{ type|default('text') }}" name="mailchimp_fields[{{ key }}]" value="{{ value|e }}" class="{{ class|default('input_field') }}" />
         </td>
     </tr>
 {% endmacro %}
@@ -12,11 +12,11 @@
 {% macro select(name, key, type, values, value, class, required) %}
     <tr class="field_wrapper" id="field_wrapper_{{ key }}">
         <th>
-            {% if required %}<span class="required">*</span>{% endif %} <label for="field{{ key }}">{{ name|trans }}</label> :
+            {% if required %}<span class="required">*</span>{% endif %} <label for="field_{{ key }}">{{ name|trans }}</label> :
         </th>
         <td>
             {% if (type == 'dropdown') %}
-                <select id="field{{ key }}" name="fields{{ key }}" class="{{ class|default('select_field') }}">
+                <select id="field_{{ key }}" name="mailchimp_fields[{{ key }}]" class="{{ class|default('select_field') }}">
                     {% for index, name in values %}
                         <option value="{{ name|e }}"{% if (value == name) %} selected="selected"{% endif %}>{{ name|trans }}</option>
                     {% endfor %}
@@ -24,7 +24,13 @@
             {% elseif (type == 'checkboxes') %}
                 <ul>
                 {% for index, name in values %}
-                    <li><input id="field{{ key }}_{{ index }}" type="checkbox" name="fields{{ key }}[]" value="{{ name|e }}" class="{{ class|default('checkbox_field') }}"{% if (value == name) %} checked="checked"{% endif %} /> <label for="field{{ key }}_{{ index }}">{{ name|trans }}</label></li>
+                    <li><input id="field_{{ key }}_{{ index }}" type="checkbox" name="mailchimp_fields[{{ key }}][]" value="{{ name|e }}" class="{{ class|default('checkbox_field') }}"{% if (value == name) %} checked="checked"{% endif %} /> <label for="field_{{ key }}_{{ index }}">{{ name|trans }}</label></li>
+                {% endfor %}
+                </ul>
+            {% elseif (type == 'radio') %}
+                <ul>
+                {% for index, name in values %}
+                    <li><input id="field{{ key }}_{{ index }}" type="radio" name="mailchimp_fields[{{ key }}][]" value="{{ name|e }}" class="{{ class|default('radio_field') }}"{% if (value == name) %} checked="checked"{% endif %} /> <label for="field_{{ key }}_{{ index }}">{{ name|trans }}</label></li>
                 {% endfor %}
                 </ul>
             {% endif %}

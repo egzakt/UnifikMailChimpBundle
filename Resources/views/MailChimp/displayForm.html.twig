@@ -18,7 +18,7 @@
 
             {% for field in fields %}
                 {% if (field.field_type == 'text') %}
-                    {{ forms.input(field.name, field.tag, 'text', field.default, null, field.size, field.req) }}
+                    {{ forms.input(field.name, field.tag, 'text', field.default, null, field.req) }}
                 {% endif %}
 
                 {% if ((field.field_type == 'dropdown') or (field.field_type == 'radio')) %}
