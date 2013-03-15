@@ -36,7 +36,7 @@ class MailChimpController extends Controller
      *
      * Init the API, get the List Fields and Groupings
      *
-     * @param $id The Subscription List id
+     * @param int $id The Subscription List id
      *
      * @throws \Exception
      */
@@ -52,6 +52,46 @@ class MailChimpController extends Controller
 
         $this->fields = $this->api->listMergeVars($this->subscriberList->getListId());
         $this->groupings = $this->api->listInterestGroupings($this->subscriberList->getListId());
+
+        // Remove hidden fields
+        $this->fields = $this->normalizeData($this->fields);
+
+        $a = $this->fields;
+    }
+
+    /**
+     * Normalize Data
+     *
+     * Return a normalized field type for form creation and removes fields we don't want to show
+     *
+     * @param array $fields
+     *
+     * @return array
+     */
+    protected function normalizeData($fields)
+    {
+        // Convert "special" types to standard form field types
+        $normalizedTypes = array(
+            'email' => 'text',
+            'imageurl' => 'text',
+            'url' => 'text',
+            'zip' => 'text',
+            'number' => 'text',
+            'birthday' => 'date'
+        );
+
+        foreach($fields as $key => $field) {
+            if (!$field['show']) {
+                unset($fields[$key]);
+                continue;
+            }
+
+            if (array_key_exists($field['field_type'], $normalizedTypes)) {
+                $fields[$key]['field_type'] = $normalizedTypes[$field['field_type']];
+            }
+        }
+
+        return $fields;
     }
 
     /**
@@ -59,16 +99,20 @@ class MailChimpController extends Controller
      *
      * Display the form to register to a Subscription List
      *
-     * @param $id
+     * @param int $id The SubscriberList id
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function displayFormAction($id)
     {
         // Init the list
         $this->init($id);
 
-        return new Response('a');
+        return $this->render('EgzaktMailChimpBundle:MailChimp:displayForm.html.twig', array(
+            'subscriberList' => $this->subscriberList,
+            'fields' => $this->fields,
+            'grouping' => $this->groupings
+        ));
     }
 
 }

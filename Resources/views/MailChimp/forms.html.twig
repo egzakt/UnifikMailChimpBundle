@@ -1,26 +1,22 @@
-{% macro input(name, key, type, value, class, required) %}
-    <tr class="custom_field_wrapper" id="custom_field_wrapper_{{ key }}">
+{% macro input(name, key, type, value, class, size, required) %}
+    <tr class="field_wrapper" id="field_wrapper_{{ key }}">
         <th>
-            {% if required %}<span class="required">*</span>{% endif %} <label for="custom_field{{ key }}">{{ name|trans }}</label> :
+            {% if required %}<span class="required">*</span>{% endif %} <label for="field{{ key }}">{{ name|trans }}</label> :
         </th>
         <td>
-            <input id="custom_field{{ key }}" type="{{ type|default('text') }}" name="custom_fields{{ key }}" value="{{ value|e }}" class="{{ class|default('custom_input_field') }}" />
+            <input id="field{{ key }}" type="{{ type|default('text') }}" name="fields{{ key }}" value="{{ value|e }}" class="{{ class|default('input_field') }}"{% if size %} size="{{ size }}"{% endif %} />
         </td>
     </tr>
 {% endmacro %}
 
-{% macro select(name, key, type, values, value, class, required, emptyValue, emptyValueString) %}
-    <tr class="custom_field_wrapper" id="custom_field_wrapper_{{ key }}">
+{% macro select(name, key, type, values, value, class, required) %}
+    <tr class="field_wrapper" id="field_wrapper_{{ key }}">
         <th>
-            {% if required %}<span class="required">*</span>{% endif %} <label for="custom_field{{ key }}">{{ name|trans }}</label> :
+            {% if required %}<span class="required">*</span>{% endif %} <label for="field{{ key }}">{{ name|trans }}</label> :
         </th>
         <td>
             {% if (type == 'dropdown') %}
-                <select id="custom_field{{ key }}" name="custom_fields{{ key }}" class="{{ class|default('custom_select_field') }}">
-                    {% if (emptyValue or emptyValueString) %}
-                        <option value="{{ emptyValue|e }}">{{ emptyValueString }}</option>
-                        <option value="">----------</option>
-                    {% endif %}
+                <select id="field{{ key }}" name="fields{{ key }}" class="{{ class|default('select_field') }}">
                     {% for index, name in values %}
                         <option value="{{ name|e }}"{% if (value == name) %} selected="selected"{% endif %}>{{ name|trans }}</option>
                     {% endfor %}
@@ -28,7 +24,7 @@
             {% elseif (type == 'checkboxes') %}
                 <ul>
                 {% for index, name in values %}
-                    <li><input id="custom_field{{ key }}_{{ index }}" type="checkbox" name="custom_fields{{ key }}[]" value="{{ name|e }}" class="{{ class|default('custom_checkbox_field') }}"{% if (value == name) %} checked="checked"{% endif %} /> <label for="custom_field{{ key }}_{{ index }}">{{ name|trans }}</label></li>
+                    <li><input id="field{{ key }}_{{ index }}" type="checkbox" name="fields{{ key }}[]" value="{{ name|e }}" class="{{ class|default('checkbox_field') }}"{% if (value == name) %} checked="checked"{% endif %} /> <label for="field{{ key }}_{{ index }}">{{ name|trans }}</label></li>
                 {% endfor %}
                 </ul>
             {% endif %}
