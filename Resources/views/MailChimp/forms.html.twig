@@ -30,7 +30,7 @@
             {% elseif (type == 'radio') %}
                 <ul>
                 {% for index, choice_name in values %}
-                    <li><input id="field{{ key }}_{{ index }}" type="radio" name="mailchimp_fields[{{ key }}][]" value="{{ choice_name|e }}" class="{{ class|default('radio_field') }}"{% if (value == choice_name) %} checked="checked"{% endif %} /> <label for="field_{{ key }}_{{ index }}">{{ choice_name|trans }}</label></li>
+                    <li><input id="field_{{ key }}_{{ index }}" type="radio" name="mailchimp_fields[{{ key }}]" value="{{ choice_name|e }}" class="{{ class|default('radio_field') }}"{% if (value == choice_name) %} checked="checked"{% endif %} /> <label for="field_{{ key }}_{{ index }}">{{ choice_name|trans }}</label></li>
                 {% endfor %}
                 </ul>
             {% endif %}
