@@ -21,7 +21,7 @@ Egzakt\MailChimpBundle\Entity\SubscriberListTranslation:
       length: 255
   manyToOne:
     translatable:
-      targetEntity: Egzakt\Backend\SubscriberBundle\Entity\SubscriberList
+      targetEntity: Egzakt\MailChimpBundle\Entity\SubscriberList
       inversedBy:  translations
       joinColumn:
         name: translatableId
