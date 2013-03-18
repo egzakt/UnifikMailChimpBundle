@@ -9,18 +9,12 @@
                 data: $(this).serialize(),
                 type: 'POST',
                 success: function(response){
-                    if (response.error || response.Code) {
+                    if (response.error) {
                         html = '<ul>';
 
-                        // Campaign Monitor Error
-                        if (response.Code) {
-                            html = html + '<li>' + response.Message + '</li>';
-                        }
-                        // Our error
-                        else {
-                            for(index in response.errorMessage) {
-                                html = html + '<li>' + response.errorMessage[index] + '</li>';
-                            }
+                        // Errors
+                        for(index in response.errorMessage) {
+                            html = html + '<li>' + response.errorMessage[index] + '</li>';
                         }
 
                         html = html + '</ul>';

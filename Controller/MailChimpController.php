@@ -43,6 +43,11 @@ class MailChimpController extends Controller
     protected $groupings;
 
     /**
+     * @var array $postedFields The posted fields
+     */
+    protected $postedFields;
+
+    /**
      * @var array $mergeVars The array of parameters to send to MailChimp
      */
     protected $mergeVars = array();
@@ -154,15 +159,13 @@ class MailChimpController extends Controller
         if (is_array($value)) {
             if (!count($value)) {
                 $this->error = true;
+                $this->errors[] = $this->get('translator')->trans('%field% is required.', array('%field%' => $fieldName));
             }
         } else {
             if (!$notBlankValidator->isValid(trim($value), $notBlankConstraint)) {
                 $this->error = true;
+                $this->errors[] = $this->get('translator')->trans('%field% is required.', array('%field%' => $fieldName));
             }
-        }
-
-        if ($this->error) {
-            $this->errors[] = $this->get('translator')->trans('%field% is required.', array('%field%' => $fieldName));
         }
     }
 
@@ -235,17 +238,15 @@ class MailChimpController extends Controller
      * Process Fields
      *
      * Validate posted values and prepare the list fields data to send to MailChimp
-     *
-     * @param array $postedFields The posted fields
      */
-    protected function processFields($postedFields)
+    protected function processFields()
     {
         // Loop through the fields to validate
         foreach($this->fields as $field) {
 
             // If field was not posted, we set a null value
-            if (!isset($postedFields[$field['tag']])) {
-                $postedFields[$field['tag']] = null;
+            if (!isset($this->postedFields[$field['tag']])) {
+                $this->postedFields[$field['tag']] = null;
             }
 
             // Required field
@@ -255,37 +256,41 @@ class MailChimpController extends Controller
                     // addr2 is not required
                     foreach(array('addr1' => 'Address 1', 'city' => 'City', 'state' => 'Province/State', 'zip' => 'Postal Code/ZIP', 'country' => 'Country') as $addrField => $addrFieldName) {
                         // If field was not posted, we set a null value
-                        if (!isset($postedFields[$field['tag']])) {
-                            $postedFields[$field['tag']][$addrField] = null;
+                        if (!isset($this->postedFields[$field['tag']][$addrField])) {
+                            $this->postedFields[$field['tag']][$addrField] = null;
                         }
 
-                        $this->isNotBlank($this->get('translator')->trans($addrFieldName), $postedFields[$field['tag']][$addrField]);
+                        $this->isNotBlank($this->get('translator')->trans($addrFieldName), $this->postedFields[$field['tag']][$addrField]);
                     }
                 // Regular field
                 } else {
-                    $this->isNotBlank($field['name'], $postedFields[$field['tag']]);
+                    $this->isNotBlank($field['name'], $this->postedFields[$field['tag']]);
                 }
             }
 
             // Different validations based on field type
             switch($field['field_type']) {
                 case 'email':
-                    $this->isEmailValid($field['name'], $postedFields[$field['tag']]);
+                    $this->isEmailValid($field['name'], $this->postedFields[$field['tag']]);
                     break;
                 case 'date':
+                    $this->isDateValid($field['name'], $this->postedFields[$field['tag']]);
+                    $this->postedFields[$field['tag']] = date('Y/m/d', strtotime($this->postedFields[$field['tag']]));
+                    break;
                 case 'birthday':
-                    $this->isDateValid($field['name'], $postedFields[$field['tag']]);
+                    $this->isDateValid($field['name'], $this->postedFields[$field['tag']]);
+                    $this->postedFields[$field['tag']] = date('m/d', strtotime($this->postedFields[$field['tag']]));
                     break;
                 case 'url':
                 case 'imageurl':
-                    $this->isUrlValid($field['name'], $postedFields[$field['tag']]);
+                    $this->isUrlValid($field['name'], $this->postedFields[$field['tag']]);
                     break;
                 case 'number':
-                    $this->isNumberValid($field['name'], $postedFields[$field['tag']]);
+                    $this->isNumberValid($field['name'], $this->postedFields[$field['tag']]);
                     break;
             }
 
-            $this->mergeVars[$field['tag']] = $postedFields[$field['tag']];
+            $this->mergeVars[$field['tag']] = $this->postedFields[$field['tag']];
         }
     }
 
@@ -293,25 +298,24 @@ class MailChimpController extends Controller
      * Process Groupings
      *
      * Validate posted values and prepare the groupings data to send to MailChimp
-     *
-     * @param array $postedFields The posted fields
      */
-    protected function processGroupings($postedFields)
+    protected function processGroupings()
     {
         $this->mergeVars['GROUPINGS'] = array();
 
         // Loop through the grouping to validate
         foreach($this->groupings as $grouping) {
             // If field was posted
-            if (isset($postedFields[$grouping['id']])) {
+            if (isset($this->postedFields[$grouping['id']])) {
                 // Commas in Interest Group names should be escaped with a backslash. ie, "," => "\," and either an "id" or "name" parameter to specify the Grouping
-                if (is_array($postedFields[$grouping['id']])) {
-                    array_walk($postedFields[$grouping['id']], function(&$value, $key) {
+                if (is_array($this->postedFields[$grouping['id']])) {
+                    array_walk($this->postedFields[$grouping['id']], function(&$value, $key) {
                         $value = str_replace(',', '\,', $value);
                     });
-                    $values = implode(',', $postedFields[$grouping['id']]);
+                    
+                    $values = implode(',', $this->postedFields[$grouping['id']]);
                 } else {
-                    $values = $postedFields[$grouping['id']];
+                    $values = $this->postedFields[$grouping['id']];
                 }
 
                 $this->mergeVars['GROUPINGS'][] = array(
@@ -367,26 +371,33 @@ class MailChimpController extends Controller
         if ($request->getMethod() == 'POST') {
 
             // POST form fields
-            $postedFields = $request->request->get('mailchimp_fields');
+            $this->postedFields = $request->request->get('mailchimp_fields');
 
             // Process the list fields
-            $this->processFields($postedFields);
+            $this->processFields();
 
             // Process the groupings
-            $this->processGroupings($postedFields);
+            $this->processGroupings();
 
             // No errors, send data to MailChimp
             if (!$this->error) {
+                $this->api->listSubscribe($this->subscriberList->getListId(), $this->mergeVars['EMAIL'], $this->mergeVars, 'html', true, true);
 
+                if ($this->api->errorCode) {
+                    $this->error = true;
+                    $this->errors[] = $this->api->errorMessage;
+                }
             }
         }
 
-        return $this->render('EgzaktMailChimpBundle:MailChimp:subscribe.html.twig', array(
-            'response' => json_encode(array(
-                    'error' => $this->error,
-                    'errorMessage' => $this->errors
-            ))
-        ));
+        $response = new Response(json_encode(array(
+            'error' => $this->error,
+            'errorMessage' => $this->errors
+        )));
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
 }
