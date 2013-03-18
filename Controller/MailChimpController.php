@@ -7,6 +7,8 @@ use Egzakt\MailChimpBundle\Lib\MailChimpApi;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Locale\Locale;
 
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\EmailValidator;
@@ -88,8 +90,7 @@ class MailChimpController extends Controller
             'url' => 'text',
             'zip' => 'text',
             'number' => 'text',
-            'birthday' => 'date',
-            'address' => 'text'
+            'birthday' => 'date'
         );
 
         foreach($fields as $key => $field) {
@@ -132,11 +133,12 @@ class MailChimpController extends Controller
      *
      * Display the form to register to a Subscription List
      *
+     * @param Request $request
      * @param integer $id The SubscriberList id
      *
      * @return Response
      */
-    public function displayFormAction($id)
+    public function displayFormAction(Request $request, $id)
     {
         // Init the list
         $this->init($id);
@@ -144,7 +146,8 @@ class MailChimpController extends Controller
         return $this->render('EgzaktMailChimpBundle:MailChimp:displayForm.html.twig', array(
             'subscriberList' => $this->subscriberList,
             'fields' => $this->fields,
-            'groupings' => $this->groupings
+            'groupings' => $this->groupings,
+            'countries' => Locale::getDisplayCountries($request->getLocale())
         ));
     }
 

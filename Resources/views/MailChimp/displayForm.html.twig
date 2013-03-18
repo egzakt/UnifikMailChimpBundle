@@ -25,7 +25,14 @@
                     {% endif %}
 
                     {% if (field.field_type == 'date') %}
-                        {{ forms.input(field.name, field.tag, 'text', field.default, 'calendar', field.size, field.req) }}
+                        {{ forms.input(field.name, field.tag, 'text', field.default, 'calendar', field.req) }}
+                    {% endif %}
+
+                    {% if (field.field_type == 'address') %}
+                        {% for subField, required in {'addr1': true, 'addr2': false, 'city': true, 'state': true, 'zip': true} %}
+                            {{ forms.input(field.name, field.tag, 'text', field.default, null, required, subField) }}
+                        {% endfor %}
+                        {{ forms.select(field.name, field.id, 'dropdown', countries, 'Canada', null, true, 'country', true) }}
                     {% endif %}
                 {% endfor %}
 
