@@ -32,7 +32,7 @@
                         {% for subField, required in {'addr1': true, 'addr2': false, 'city': true, 'state': true, 'zip': true} %}
                             {{ forms.input(field.name, field.tag, 'text', field.default, null, required, subField) }}
                         {% endfor %}
-                        {{ forms.select(field.name, field.id, 'dropdown', countries, 'Canada', null, true, 'country', true) }}
+                        {{ forms.select(field.name, field.tag, 'dropdown', countries, 'Canada', null, true, 'country', true) }}
                     {% endif %}
                 {% endfor %}
 

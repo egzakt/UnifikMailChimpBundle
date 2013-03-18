@@ -10,7 +10,7 @@
 {% endmacro %}
 
 {% macro select(name, key, type, values, value, class, required, subKey, indexValue) %}
-    <tr class="field_wrapper" id="field_wrapper_{{ key }}">
+    <tr class="field_wrapper" id="field_wrapper_{{ key }}{% if subKey %}_{{ subKey }}{% endif %}">
         <th>
             {% if required %}<span class="required">*</span>{% endif %} <label for="field_{{ key }}{% if subKey %}_{{ subKey }}{% endif %}">{% if subKey %}{{ subKey|trans }}{% else %}{{ name|trans }}{% endif %}</label> :
         </th>

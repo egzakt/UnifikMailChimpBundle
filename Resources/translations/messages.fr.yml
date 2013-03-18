@@ -4,3 +4,18 @@ city: Ville
 state: Province/État
 zip: Code postal/ZIP
 country: Pays
+Address 1: Adresse 1
+Address 2: Adresse 2
+City: Ville
+Province/State: Province/État
+Postal Code/ZIP: Code postal/ZIP
+Country: Pays
+
+%field% is required.: %field% est requis.
+%field% must be a valid URL.: %field% doit être une URL valide.
+%field% must be a valid date.: %field% doit être une date valide.
+%field% must be a valid email address.: %field% doit être un courriel valide.
+%field% must be a valid number.: %field% doit être un nombre valide.
+You have successfully subscribed to our newsletter.: Vous avez été ajouté à notre infolettre avec succès.
+This email is already subscribed.: Ce courriel est déjà inscrit à l'infolettre.
+Submit: Soumettre
