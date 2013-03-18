@@ -287,8 +287,6 @@ class MailChimpController extends Controller
 
             $this->mergeVars[$field['tag']] = $postedFields[$field['tag']];
         }
-
-        $this->mergeVars['GROUPINGS'] = array();
     }
 
     /**
@@ -300,6 +298,8 @@ class MailChimpController extends Controller
      */
     protected function processGroupings($postedFields)
     {
+        $this->mergeVars['GROUPINGS'] = array();
+
         // Loop through the grouping to validate
         foreach($this->groupings as $grouping) {
             // If field was posted
