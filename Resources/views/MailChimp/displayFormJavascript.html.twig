@@ -1,5 +1,18 @@
 {% block subscriberJavascript %}
     <script type="text/javascript">
+        $(function(){
+            if ($.datepicker) {
+                $('.calendar').datepicker({
+                    showAnim: 'fadeIn',
+                    dateFormat: 'yy-mm-dd',
+                    firstDay: 7
+                });
+
+                var locale = '{{ app.request.locale }}';
+                $.datepicker.setDefaults($.datepicker.regional[locale]);
+            }
+        });
+
         $('#mailchimp_form').submit(function(e){
             e.preventDefault();
 
