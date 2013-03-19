@@ -10,6 +10,7 @@ The form is posted via AJAX so jQuery >= 1.0 is required. If jQuery UI is loaded
 ## Content
 * Installation
 * How to use
+* Screenshots
 
 ## Installation
 1. Add the following to your `deps` file:
@@ -62,3 +63,16 @@ To display the Subscription Form in your application, simply include jQuery in y
 ```twig
 {% render 'EgzaktMailChimpBundle:MailChimp:displayForm' with { id: 1 } %}
 ```
+
+## Screenshots
+List of available form field types:
+
+![Available form field types](/doc/form.png)
+
+Validations before sending the data to MailChimp API:
+
+![Validations](/doc/validations.png)
+
+Confirmation message when successfully subscribed:
+
+![Confirmation](/doc/confirmation.png)
