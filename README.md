@@ -5,6 +5,8 @@ EgzaktMailChimpBundle
 
 This bundle is still experimental and has been developed for Symfony 2.0,  it has not been tested on the latest versions of Symfony.
 
+The form is posted via AJAX so jQuery >= 1.0 is required.
+
 ## Content
 * Installation
 * How to use
@@ -51,7 +53,12 @@ This bundle is still experimental and has been developed for Symfony 2.0,  it ha
 6. Create a new `MailChimpSubscriptionList` in your database, you will need to create a `MailChimpSubscriptionListTranslation` for each Locale of your application. The `listId` field is the List Unique Id that you can find in the "Settings" tab in the list configuration page.
 
 ## How to use
-To display the Subscription Form in your application, simply add this line to a Twig template, where `id` is the ID of the `MailChimpSubscriptionList` in your database:
+To display the Subscription Form in your application, simply include jQuery in your `<HEAD>` and add this line to a Twig template, where `id` is the ID of the `MailChimpSubscriptionList` in your database:
+
+```html
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+```
+
 ```twig
 {% render 'EgzaktMailChimpBundle:MailChimp:displayForm' with { id: 1 } %}
 ```
