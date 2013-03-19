@@ -83,6 +83,11 @@ class MailChimpController extends Controller
 
         $this->fields = $this->api->listMergeVars($this->subscriberList->getListId());
         $this->groupings = $this->api->listInterestGroupings($this->subscriberList->getListId());
+
+        // There may be no groupings
+        if (!$this->groupings) {
+            $this->groupings = array();
+        }
     }
 
     /**
