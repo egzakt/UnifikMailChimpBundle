@@ -30,13 +30,13 @@ This bundle is still experimental and has been developed for Symfony 2.0,  it ha
     }
    ```
 
-3. Import the `EgzaktMailChimpBundle` routing to your `routing.yml`:
+3. Import the `EgzaktMailChimpBundle` routing to your `app/config/routing.yml`:
    ```yml
     EgzaktMailChimpBundle:
         resource: "@EgzaktMailChimpBundle/Resources/config/routing.yml"
    ```
 
-4. Configure your MailChimp API Key in your `config.yml`:
+4. Configure your MailChimp API Key in your `app/config/config.yml`:
    ```yml
     # MailChimp
     egzakt_mail_chimp:
