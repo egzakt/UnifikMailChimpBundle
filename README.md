@@ -5,7 +5,7 @@ EgzaktMailChimpBundle
 
 This bundle is still experimental and has been developed for Symfony 2.0,  it has not been tested on the latest versions of Symfony.
 
-The form is posted via AJAX so jQuery >= 1.0 is required.
+The form is posted via AJAX so jQuery >= 1.0 is required. If jQuery UI is loaded, datepicker will automatically be added on date fields.
 
 ## Content
 * Installation
