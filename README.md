@@ -1,7 +1,7 @@
 EgzaktMailChimpBundle
 =====================
 
-`EgzaktMailChimpBundle` let you easily integrate a MailChimp Subscription Form in your application simply be configuring an API Key and a Subscription List Unique ID. It supports both List Fields and Groupings. The form is posted via AJAX to a controller inside this bundle so there is no need to create a controlelr to handle the posted form. All data is validated depending on the field types.
+`EgzaktMailChimpBundle` let you easily integrate a MailChimp Subscription Form in your application simply be configuring an API Key and a Subscription List Unique ID. It supports both List Fields and Groupings. The form is posted via AJAX to a controller inside this bundle so there is no need to create a controller to handle the posted form. All data is validated depending on the field types.
 
 This bundle is still experimental and has been developed for Symfony 2.0,  it has not been tested on the latest versions of Symfony.
 
