@@ -58,7 +58,7 @@
     font-weight:bold;
     font-size:1.167em;
     line-height:1.2em;
-    background:#fff url(/bundles/egzaktfrontendcore/images/icons/error.png) no-repeat 10px 10px;
+    background:#fff url(/bundles/unifikmailchimp/images/error.png) no-repeat 10px 10px;
 }
 
 #mailchimp_wrapper .error_message li {

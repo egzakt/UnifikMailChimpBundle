@@ -1,6 +1,6 @@
 <?php
 
-namespace Egzakt\MailChimpBundle\Lib;
+namespace Unifik\MailChimpBundle\Lib;
 
 require_once __DIR__ . '/MailChimp/MCAPI.class.php';
 
@@ -9,7 +9,7 @@ require_once __DIR__ . '/MailChimp/MCAPI.class.php';
  *
  * This class is a wrapper over MCAPI to be used as a Symfony Service
  *
- * @package Egzakt\MailChimpBundle\Lib
+ * @package Unifik\MailChimpBundle\Lib
  */
 class MailChimpApi
 {

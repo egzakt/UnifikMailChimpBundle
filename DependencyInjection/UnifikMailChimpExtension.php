@@ -1,6 +1,6 @@
 <?php
 
-namespace Egzakt\MailChimpBundle\DependencyInjection;
+namespace Unifik\MailChimpBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class EgzaktMailChimpExtension extends Extension
+class UnifikMailChimpExtension extends Extension
 {
 
     /**
@@ -28,13 +28,13 @@ class EgzaktMailChimpExtension extends Extension
 
         // API Class
         if (isset($config['api']['class'])) {
-            $container->setParameter('egzakt_mail_chimp.api.class', $config['api']['class']);
+            $container->setParameter('unifik_mail_chimp.api.class', $config['api']['class']);
         }
 
         // Other parameters
         foreach(array('api_key', 'secure') as $param) {
             if (isset($config[$param])) {
-                $container->setParameter('egzakt_mail_chimp.' . $param, $config[$param]);
+                $container->setParameter('unifik_mail_chimp.' . $param, $config[$param]);
             }
         }
     }

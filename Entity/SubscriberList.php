@@ -1,40 +1,31 @@
 <?php
 
-namespace Egzakt\MailChimpBundle\Entity;
+namespace Unifik\MailChimpBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
-use Egzakt\Backend\CoreBundle\Lib\BaseEntity;
+use Flexy\DoctrineBehaviorsBundle\Model as FlexyORMBehaviors;
 
 /**
- * Egzakt\Backend\SubscriberBundle\Entity\SubscriberList
+ * Class SubscriberList
+ * @package Unifik\MailChimpBundle\Entity
  */
-class SubscriberList extends BaseEntity
+class SubscriberList
 {
+    use FlexyORMBehaviors\Translatable\Translatable;
+
     /**
      * @var integer $id
      */
     protected $id;
 
     /**
-     * @var datetime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
 
     /**
-     * @var datetime $updatedAt
+     * @var \DateTime $updatedAt
      */
     protected $updatedAt;
-
-    /**
-     * @var Egzakt\MailChimpBundle\Entity\SubscriberListTranslation
-     */
-    protected $translations;
-
-    public function __construct()
-    {
-        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -47,19 +38,21 @@ class SubscriberList extends BaseEntity
     }
 
     /**
-     * Set createdAt
+     * Set CreatedAt
      *
-     * @param datetime $createdAt
+     * @param $createdAt
+     * @return $this
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+        return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return datetime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -67,33 +60,24 @@ class SubscriberList extends BaseEntity
     }
 
     /**
-     * Set updatedAt
+     * Set UpdatedAt
      *
-     * @param datetime $updatedAt
+     * @param $updatedAt
+     * @return $this
      */
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+        return $this;
     }
 
     /**
      * Get updatedAt
      *
-     * @return datetime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
-
-    /**
-     * Get translations
-     *
-     * @return Doctrine\Common\Collections\Collection
-     */
-    public function getTranslations()
-    {
-        return $this->translations;
-    }
-
 }

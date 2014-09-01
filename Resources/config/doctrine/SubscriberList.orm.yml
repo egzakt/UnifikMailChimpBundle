@@ -1,7 +1,7 @@
-Egzakt\MailChimpBundle\Entity\SubscriberList:
+Unifik\MailChimpBundle\Entity\SubscriberList:
   type: entity
   table: MailChimpSubscriberList
-  repositoryClass: Egzakt\MailChimpBundle\Entity\SubscriberListRepository
+  repositoryClass: Unifik\MailChimpBundle\Entity\SubscriberListRepository
   fields:
     id:
       type: integer
@@ -19,9 +19,3 @@ Egzakt\MailChimpBundle\Entity\SubscriberList:
         timestampable:
           on: update
   lifecycleCallbacks: {  }
-  oneToMany:
-    translations:
-      targetEntity: Egzakt\MailChimpBundle\Entity\SubscriberListTranslation
-      mappedBy: translatable
-      fetch: EAGER
-      cascade: [persist]

@@ -1,4 +1,4 @@
 services:
-    egzakt_mail_chimp.api:
-        class: %egzakt_mail_chimp.api.class%
-        arguments: [%egzakt_mail_chimp.api_key%, %egzakt_mail_chimp.secure%]
+    unifik_mail_chimp.api:
+        class: %unifik_mail_chimp.api.class%
+        arguments: [%unifik_mail_chimp.api_key%, %unifik_mail_chimp.secure%]

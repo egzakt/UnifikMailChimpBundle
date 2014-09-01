@@ -1,9 +1,9 @@
 <?php
 
-namespace Egzakt\MailChimpBundle\Controller;
+namespace Unifik\MailChimpBundle\Controller\Frontend;
 
-use Egzakt\MailChimpBundle\Entity\SubscriberList;
-use Egzakt\MailChimpBundle\Lib\MailChimpApi;
+use Unifik\MailChimpBundle\Entity\SubscriberList;
+use Unifik\MailChimpBundle\Lib\MailChimpApi;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,9 +73,9 @@ class MailChimpController extends Controller
      */
     protected function init($id)
     {
-        $this->api = $this->get('egzakt_mail_chimp.api')->getApi();
+        $this->api = $this->get('unifik_mail_chimp.api')->getApi();
 
-        $this->subscriberList = $this->get('doctrine')->getEntityManager()->getRepository('EgzaktMailChimpBundle:SubscriberList')->find($id);
+        $this->subscriberList = $this->get('doctrine')->getManager()->getRepository('UnifikMailChimpBundle:SubscriberList')->find($id);
 
         if (!$this->subscriberList) {
             throw new \Exception('Unable to find this Subscriber List');
@@ -159,7 +159,6 @@ class MailChimpController extends Controller
     {
         // NotBlank Validator
         $notBlankConstraint = new NotBlank();
-        $notBlankValidator = new NotBlankValidator();
 
         if (is_array($value)) {
             if (!count($value)) {
@@ -167,7 +166,7 @@ class MailChimpController extends Controller
                 $this->errors[] = $this->get('translator')->trans('%field% is required.', array('%field%' => $fieldName));
             }
         } else {
-            if (!$notBlankValidator->isValid(trim($value), $notBlankConstraint)) {
+            if (count($this->get('validator')->validateValue(trim($value), $notBlankConstraint)) > 0) {
                 $this->error = true;
                 $this->errors[] = $this->get('translator')->trans('%field% is required.', array('%field%' => $fieldName));
             }
@@ -183,9 +182,8 @@ class MailChimpController extends Controller
     protected function isEmailValid($fieldName, $value)
     {
         $emailConstraint = new Email();
-        $emailValidator = new EmailValidator();
 
-        if (!$emailValidator->isValid($value, $emailConstraint)) {
+        if (count($this->get('validator')->validateValue($value, $emailConstraint)) > 0) {
             $this->error = true;
             $this->errors[] = $this->get('translator')->trans('%field% must be a valid email address.', array('%field%' => $fieldName));
         }
@@ -200,9 +198,8 @@ class MailChimpController extends Controller
     protected function isDateValid($fieldName, $value)
     {
         $dateConstraint = new Date();
-        $dateValidator = new DateValidator();
 
-        if (!$dateValidator->isValid($value, $dateConstraint)) {
+        if (count($this->get('validator')->validateValue($value, $dateConstraint)) > 0) {
             $this->error = true;
             $this->errors[] = $this->get('translator')->trans('%field% must be a valid date.', array('%field%' => $fieldName));
         }
@@ -217,9 +214,8 @@ class MailChimpController extends Controller
     protected function isUrlValid($fieldName, $value)
     {
         $urlConstraint = new Url();
-        $urlValidator = new UrlValidator();
 
-        if (!$urlValidator->isValid($value, $urlConstraint)) {
+        if (!$this->get('validator')->validateValue($value, $urlConstraint)) {
             $this->error = true;
             $this->errors[] = $this->get('translator')->trans('%field% must be a valid URL.', array('%field%' => $fieldName));
         }
@@ -350,8 +346,8 @@ class MailChimpController extends Controller
         $this->fields = $this->normalizeFields($this->fields);
         $this->groupings = $this->normalizeGroupings($this->groupings);
 
-        return $this->render('EgzaktMailChimpBundle:MailChimp:displayForm.html.twig', array(
-            'subscriberList' => $this->subscriberList,
+        return $this->render('UnifikMailChimpBundle:MailChimp:display_form.html.twig', array(
+            'subscriber_list' => $this->subscriberList,
             'fields' => $this->fields,
             'groupings' => $this->groupings,
             'countries' => Locale::getDisplayCountries($request->getLocale())

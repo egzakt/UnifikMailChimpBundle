@@ -1,6 +1,6 @@
 <?php
 
-namespace Egzakt\MailChimpBundle\DependencyInjection;
+namespace Unifik\MailChimpBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('egzakt_mail_chimp');
+        $rootNode = $treeBuilder->root('unifik_mail_chimp');
 
         $rootNode
             ->children()
@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('class')
-                            ->defaultValue('Egzakt\MailChimpBundle\Lib\MailChimpApi')
+                            ->defaultValue('Unifik\MailChimpBundle\Lib\MailChimpApi')
                         ->end()
                     ->end()
                 ->end()

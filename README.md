@@ -1,9 +1,9 @@
-EgzaktMailChimpBundle
+UnifikMailChimpBundle
 =====================
 
-`EgzaktMailChimpBundle` let you easily integrate a MailChimp Subscription Form in your application simply be configuring an API Key and a Subscription List Unique ID. It supports both List Fields and Groupings. The form is posted via AJAX to a controller inside this bundle so there is no need to create a controller to handle the posted form. All data is validated depending on the field types.
+`UnifikMailChimpBundle` let you easily integrate a MailChimp Subscription Form in your application simply be configuring an API Key and a Subscription List Unique ID. It supports both List Fields and Groupings. The form is posted via AJAX to a controller inside this bundle so there is no need to create a controller to handle the posted form. All data is validated depending on the field types.
 
-This bundle is still experimental and has been developed for Symfony 2.0,  it has not been tested on the latest versions of Symfony.
+This bundle is still experimental and has been developed for Symfony 2.3,  it has not been tested on the latest versions of Symfony.
 
 The form is posted via AJAX so jQuery >= 1.0 is required. If jQuery UI is loaded, datepicker will automatically be added on date fields.
 
@@ -15,9 +15,9 @@ The form is posted via AJAX so jQuery >= 1.0 is required. If jQuery UI is loaded
 ## Installation
 1. Add the following to your `deps` file:
    ```yml
-    [EgzaktMailChimpBundle]
-        git=http://github.com/egzakt/EgzaktMailChimpBundle.git
-        target=bundles/Egzakt/MailChimpBundle
+    [UnifikMailChimpBundle]
+        git=http://github.com/unifik/UnifikMailChimpBundle.git
+        target=bundles/Unifik/MailChimpBundle
    ```
 
 2. Register the bundle in your `app/AppKernel.php`:
@@ -27,22 +27,22 @@ The form is posted via AJAX so jQuery >= 1.0 is required. If jQuery UI is loaded
     {
         $bundles = array(
         ...
-            new Egzakt\MailChimpBundle\EgzaktMailChimpBundle(),
+            new Unifik\MailChimpBundle\UnifikMailChimpBundle(),
         ...
         );
     }
    ```
 
-3. Import the `EgzaktMailChimpBundle` routing to your `app/config/routing.yml`:
+3. Import the `UnifikMailChimpBundle` routing to your `app/config/routing.yml`:
    ```yml
-    EgzaktMailChimpBundle:
-        resource: "@EgzaktMailChimpBundle/Resources/config/routing.yml"
+    UnifikMailChimpBundle:
+        resource: "@UnifikMailChimpBundle/Resources/config/routing_frontend.yml"
    ```
 
 4. Configure your MailChimp API Key in your `app/config/config.yml`:
    ```yml
     # MailChimp
-    egzakt_mail_chimp:
+    unifik_mail_chimp:
         api_key: 1234567890qwerty-us5
    ```
 
@@ -61,7 +61,7 @@ To display the Subscription Form in your application, simply include jQuery in y
 ```
 
 ```twig
-{% render 'EgzaktMailChimpBundle:MailChimp:displayForm' with { id: 1 } %}
+{{ render(controller('UnifikMailChimpBundle:Frontend/MailChimp:displayForm', { id: 1 })) }}
 ```
 
 ## Screenshots

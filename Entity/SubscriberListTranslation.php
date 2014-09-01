@@ -1,16 +1,16 @@
 <?php
 
-namespace Egzakt\MailChimpBundle\Entity;
+namespace Unifik\MailChimpBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
-use Egzakt\Backend\CoreBundle\Lib\BaseTranslationEntity;
+use Flexy\DoctrineBehaviorsBundle\Model as FlexyORMBehaviors;
 
 /**
- * Egzakt\MailChimpBundle\Entity\SubscriberListTranslation
+ * Class SubscriberListTranslation
+ * @package Unifik\MailChimpBundle\Entity
  */
-class SubscriberListTranslation extends BaseTranslationEntity
+class SubscriberListTranslation
 {
+    use FlexyORMBehaviors\Translatable\Translation;
 
     /**
      * @var integer $id
@@ -18,19 +18,14 @@ class SubscriberListTranslation extends BaseTranslationEntity
     protected $id;
 
     /**
-     * @var string $locale
-     */
-    protected $locale;
-
-    /**
      * @var string $listId
      */
     protected $listId;
 
     /**
-     * @var Egzakt\Backend\SubscriberBundle\Entity\SubscriberList
+     * @var string
      */
-    protected $translatable;
+    private $name;
 
     /**
      * Get id
@@ -40,26 +35,6 @@ class SubscriberListTranslation extends BaseTranslationEntity
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set locale
-     *
-     * @param string $locale
-     */
-    public function setLocale($locale)
-    {
-        $this->locale = $locale;
-    }
-
-    /**
-     * Get locale
-     *
-     * @return string 
-     */
-    public function getLocale()
-    {
-        return $this->locale;
     }
 
     /**
@@ -83,23 +58,25 @@ class SubscriberListTranslation extends BaseTranslationEntity
     }
 
     /**
-     * Set translatable
+     * Set name
      *
-     * @param Egzakt\Backend\SubscriberBundle\Entity\SubscriberList $translatable
+     * @param string $name
+     * @return SubscriberListTranslation
      */
-    public function setTranslatable(\Egzakt\Backend\SubscriberBundle\Entity\SubscriberList $translatable)
+    public function setName($name)
     {
-        $this->translatable = $translatable;
+        $this->name = $name;
+    
+        return $this;
     }
 
     /**
-     * Get translatable
+     * Get name
      *
-     * @return Egzakt\Backend\SubscriberBundle\Entity\SubscriberList 
+     * @return string 
      */
-    public function getTranslatable()
+    public function getName()
     {
-        return $this->translatable;
+        return $this->name;
     }
-
 }

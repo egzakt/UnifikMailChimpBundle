@@ -1,8 +1,8 @@
 <?php
 
-namespace Egzakt\MailChimpBundle\Entity;
+namespace Unifik\MailChimpBundle\Entity;
 
-use Egzakt\Backend\CoreBundle\Lib\BaseEntityRepository;
+use Flexy\SystemBundle\Lib\BaseEntityRepository;
 
 /**
  * SubscriberListRepository

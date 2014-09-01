@@ -1,13 +1,13 @@
-{% import "EgzaktMailChimpBundle:MailChimp:forms.html.twig" as forms %}
+{% import "UnifikMailChimpBundle:MailChimp:forms.html.twig" as forms %}
 
 {% stylesheets
-    '@EgzaktMailChimpBundle/Resources/public/css/*'
+    '@UnifikMailChimpBundle/Resources/public/css/*'
 %}
 <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
 {% endstylesheets %}
 
 <div id="mailchimp_wrapper">
-    <form name="subscribe" id="mailchimp_form" method="post" action="{{ path('EgzaktMailChimpBundle_subscribe', { id: subscriberList.id }) }}">
+    <form name="subscribe" id="mailchimp_form" method="post" action="{{ path('unifik_mailchimp_subscribe', { id: subscriber_list.id }) }}">
 
         {% block error %}
             <div class="error_message"></div>
@@ -42,9 +42,9 @@
 
                 <tr>
                     <td colspan="2" class="submit_colomn">
-                        {% block submitButton %}
+                        {% block submit_button %}
                             <input type="submit" name="submit_subscribe" value="{% trans %}Submit{% endtrans %}" />
-                        {% endblock submitButton %}
+                        {% endblock submit_button %}
                     </td>
                 </tr>
             </table>
@@ -52,4 +52,4 @@
     </form>
 </div>
 
-{% include 'EgzaktMailChimpBundle:MailChimp:displayFormJavascript.html.twig' %}
+{% include 'UnifikMailChimpBundle:MailChimp:display_form_javascript.html.twig' %}
