@@ -13,7 +13,7 @@
             }
         });
 
-        $('#mailchimp_form').submit(function(e){
+        $('#mailchimp_form_{{ id }}').submit(function(e){
             e.preventDefault();
 
             $.ajax({
@@ -31,11 +31,11 @@
                         }
 
                         html = html + '</ul>';
-                        $('#mailchimp_wrapper .error_message').html(html).show();
+                        $('#mailchimp_wrapper_{{ id }} .error_message').html(html).show();
                     }
                     else {
-                        $('#mailchimp_wrapper .error_message').hide();
-                        $('#mailchimp_form').replaceWith('<div id="success_message">{% trans %}You have successfully subscribed to our newsletter.{% endtrans %}</div>');
+                        $('#mailchimp_wrapper_{{ id }} .error_message').hide();
+                        $('#mailchimp_form_{{ id }}').replaceWith('<div id="success_message">{% trans %}You have successfully subscribed to our newsletter.{% endtrans %}</div>');
                     }
                 }
             });

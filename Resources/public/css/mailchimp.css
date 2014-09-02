@@ -1,55 +1,55 @@
-#mailchimp_wrapper {
+.mailchimp_wrapper {
     padding: 10px 0;
 }
 
-#mailchimp_wrapper table tr {
+.mailchimp_wrapper table tr {
     vertical-align: top;
 }
 
-#mailchimp_wrapper table tr th {
+.mailchimp_wrapper table tr th {
     text-align: left;
     font-weight: normal;
     padding: 0 10px 10px 0;
 }
 
-#mailchimp_wrapper table tr td {
+.mailchimp_wrapper table tr td {
     padding: 0 0 10px 0;
 }
 
-#mailchimp_wrapper input,
-#mailchimp_wrapper select {
+.mailchimp_wrapper input,
+.mailchimp_wrapper select {
     width: 200px;
     margin-left: 1px;
     padding: 3px;
 }
 
-#mailchimp_wrapper .field_wrapper {
+.mailchimp_wrapper .field_wrapper {
     padding: 0 0 10px 0;
 }
 
-#mailchimp_wrapper input.checkbox_field {
+.mailchimp_wrapper input.checkbox_field {
     width: auto;
     margin: 0;
 }
 
-#mailchimp_wrapper input.radio_field {
+.mailchimp_wrapper input.radio_field {
     width: auto;
     margin: 0;
 }
 
-#mailchimp_wrapper input.calendar {
+.mailchimp_wrapper input.calendar {
     width:90px;
 }
 
-#mailchimp_wrapper .submit_colomn {
+.mailchimp_wrapper .submit_colomn {
     text-align: right;
 }
 
-#mailchimp_wrapper .submit_colomn input {
+.mailchimp_wrapper .submit_colomn input {
     width: auto;
 }
 
-#mailchimp_wrapper .error_message {
+.mailchimp_wrapper .error_message {
     display: none;
     padding:10px 8px 14px 45px;
     border:1px solid #D42D35;
@@ -61,11 +61,11 @@
     background:#fff url(/bundles/unifikmailchimp/images/error.png) no-repeat 10px 10px;
 }
 
-#mailchimp_wrapper .error_message li {
+.mailchimp_wrapper .error_message li {
 	padding:4px 0;
 	border-bottom:1px solid #B3B3B3;
 }
 
-#mailchimp_wrapper .required {
+.mailchimp_wrapper .required {
     color:#DE4935;
 }

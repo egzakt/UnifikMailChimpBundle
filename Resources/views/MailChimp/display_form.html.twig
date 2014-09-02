@@ -6,8 +6,10 @@
 <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
 {% endstylesheets %}
 
-<div id="mailchimp_wrapper">
-    <form name="subscribe" id="mailchimp_form" method="post" action="{{ path('unifik_mailchimp_subscribe', { id: subscriber_list.id }) }}">
+{% set id = random() %}
+
+<div id="mailchimp_wrapper_{{ id }}">
+    <form name="subscribe" id="mailchimp_form_{{ id }}" method="post" action="{{ path('unifik_mailchimp_subscribe', { id: subscriber_list.id }) }}">
 
         {% block error %}
             <div class="error_message"></div>
@@ -52,4 +54,4 @@
     </form>
 </div>
 
-{% include 'UnifikMailChimpBundle:MailChimp:display_form_javascript.html.twig' %}
+{% include 'UnifikMailChimpBundle:MailChimp:display_form_javascript.html.twig' with { 'id': id } %}
