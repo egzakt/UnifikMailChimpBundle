@@ -28,7 +28,7 @@ class SubscriberListTranslation extends BaseTranslationEntity
     protected $listId;
 
     /**
-     * @var Egzakt\Backend\SubscriberBundle\Entity\SubscriberList
+     * @var Egzakt\Backend\MailChimpBundle\Entity\SubscriberList
      */
     protected $translatable;
 
@@ -85,9 +85,9 @@ class SubscriberListTranslation extends BaseTranslationEntity
     /**
      * Set translatable
      *
-     * @param Egzakt\Backend\SubscriberBundle\Entity\SubscriberList $translatable
+     * @param Egzakt\Backend\MailChimpBundle\Entity\SubscriberList $translatable
      */
-    public function setTranslatable(\Egzakt\Backend\SubscriberBundle\Entity\SubscriberList $translatable)
+    public function setTranslatable(\Egzakt\Backend\MailChimpBundle\Entity\SubscriberList $translatable)
     {
         $this->translatable = $translatable;
     }
@@ -95,7 +95,7 @@ class SubscriberListTranslation extends BaseTranslationEntity
     /**
      * Get translatable
      *
-     * @return Egzakt\Backend\SubscriberBundle\Entity\SubscriberList 
+     * @return Egzakt\Backend\MailChimpBundle\Entity\SubscriberList
      */
     public function getTranslatable()
     {

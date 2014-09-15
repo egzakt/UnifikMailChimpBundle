@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Egzakt\Backend\CoreBundle\Lib\BaseEntity;
 
 /**
- * Egzakt\Backend\SubscriberBundle\Entity\SubscriberList
+ * Egzakt\Backend\MailChimpBundle\Entity\SubscriberList
  */
 class SubscriberList extends BaseEntity
 {
