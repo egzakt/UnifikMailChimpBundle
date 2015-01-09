@@ -5,7 +5,7 @@ namespace Unifik\MailChimpBundle\Controller\Frontend;
 use Unifik\MailChimpBundle\Entity\SubscriberList;
 use Unifik\MailChimpBundle\Lib\MailChimpApi;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Unifik\SystemBundle\Lib\Frontend\BaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Locale\Locale;
@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints\DateValidator;
 use Symfony\Component\Validator\Constraints\Url;
 use Symfony\Component\Validator\Constraints\UrlValidator;
 
-class MailChimpController extends Controller
+class MailChimpController extends BaseController
 {
 
     /**
@@ -67,15 +67,13 @@ class MailChimpController extends Controller
      *
      * Init the API, get the List Fields and Groupings
      *
-     * @param integer $id The Subscription List id
-     *
      * @throws \Exception
      */
-    protected function init($id)
+    public function init()
     {
         $this->api = $this->get('unifik_mail_chimp.api')->getApi();
 
-        $this->subscriberList = $this->get('doctrine')->getManager()->getRepository('UnifikMailChimpBundle:SubscriberList')->find($id);
+        $this->subscriberList = $this->get('doctrine')->getManager()->getRepository('UnifikMailChimpBundle:SubscriberList')->find(1);
 
         if (!$this->subscriberList) {
             throw new \Exception('Unable to find this Subscriber List');

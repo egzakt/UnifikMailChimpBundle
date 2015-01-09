@@ -9,7 +9,7 @@
 {% set id = random() %}
 
 <div id="mailchimp_wrapper_{{ id }}">
-    <form name="subscribe" id="mailchimp_form_{{ id }}" method="post" action="{{ path('unifik_mailchimp_subscribe', { id: subscriber_list.id }) }}">
+    <form name="subscribe" id="mailchimp_form_{{ id }}" method="post" action="{{ path('section_id_23_mailchimp_suscribe', { id: subscriber_list.id }) }}">
 
         {% block error %}
             <div class="error_message"></div>

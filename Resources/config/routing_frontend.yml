@@ -1,3 +1,4 @@
-unifik_mailchimp_subscribe:
+unifik_mailchimp_frontend_subscribe:
     pattern:  /mailchimp/subscribe/{id}
-    defaults: { _controller: UnifikMailChimpBundle:Frontend/MailChimp:subscribe, sectionId: 1 }
+    defaults: { _controller: UnifikMailChimpBundle:Frontend/MailChimp:subscribe, sectionId: 23 }
+    options:  { mapping_alias: "mailchimp_suscribe" }
