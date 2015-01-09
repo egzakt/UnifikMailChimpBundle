@@ -1,0 +1,38 @@
+{
+    "name": "unifik/mailchimp-bundle",
+    "type": "symfony-bundle",
+    "description": "Mailchimp integration bundle for the symfony-unifik distribution",
+    "keywords": ["unifik", "mailchimp"],
+    "homepage": "https://github.com/unifik/symfony-unifik",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hubert Perron",
+            "email": "hubert.perron@gmail.com"
+        },
+        {
+            "name": "Jean-François Côté",
+            "email": "tioiscote@gmail.com"
+        },
+        {
+            "name": "Émilie Marchand",
+            "email": "emilie.marchand@gmail.com"
+        },
+        {
+            "name": "Yanick Ouellet",
+            "email": "yanickouellet555@gmail.com"
+        },
+        {
+            "name": "Pierre-Marc David Caron",
+            "email": "pmdavidcaron@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/symfony": "~2.3",
+        "liip/imagine-bundle": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "Unifik\\ContactBundle": "" }
+    },
+    "target-dir": "Unifik/ContactBundle"
+}
