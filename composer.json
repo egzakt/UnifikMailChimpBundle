@@ -29,10 +29,9 @@
     ],
     "require": {
         "symfony/symfony": "~2.3",
-        "liip/imagine-bundle": "dev-master"
     },
     "autoload": {
-        "psr-0": { "Unifik\\MailChimpBundle": "" }
+        "psr-0": { "Unifik\\MailchimpBundle": "" }
     },
-    "target-dir": "Unifik/MailChimpBundle"
+    "target-dir": "Unifik/MailchimpBundle"
 }
