@@ -1,4 +1,5 @@
-me": "unifik/mailchimp-bundle",
+{
+    "name": "unifik/mailchimp-bundle",
     "type": "symfony-bundle",
     "description": "Mailchimp integration bundle for the symfony-unifik distribution",
     "keywords": ["unifik", "mailchimp"],
