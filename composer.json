@@ -32,7 +32,7 @@
         "liip/imagine-bundle": "dev-master"
     },
     "autoload": {
-        "psr-0": { "Unifik\\ContactBundle": "" }
+        "psr-0": { "Unifik\\MailChimpBundle": "" }
     },
-    "target-dir": "Unifik/ContactBundle"
+    "target-dir": "Unifik/MailChimpBundle"
 }
