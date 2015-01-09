@@ -2,7 +2,7 @@
 
 namespace Unifik\MailChimpBundle\Entity;
 
-use Flexy\DoctrineBehaviorsBundle\Model as FlexyORMBehaviors;
+use Unifik\DoctrineBehaviorsBundle\Model as UnifikORMBehaviors;
 
 /**
  * Class SubscriberListTranslation
@@ -10,7 +10,7 @@ use Flexy\DoctrineBehaviorsBundle\Model as FlexyORMBehaviors;
  */
 class SubscriberListTranslation
 {
-    use FlexyORMBehaviors\Translatable\Translation;
+    use UnifikORMBehaviors\Translatable\Translation;
 
     /**
      * @var integer $id

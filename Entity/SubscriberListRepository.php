@@ -2,7 +2,7 @@
 
 namespace Unifik\MailChimpBundle\Entity;
 
-use Flexy\SystemBundle\Lib\BaseEntityRepository;
+use Unifik\SystemBundle\Lib\BaseEntityRepository;
 
 /**
  * SubscriberListRepository
